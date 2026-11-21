@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "notice": "评分权重用于面试原型演示，不构成运营或合规结论；可按直播间数据调整。",
+  "stages": [
+    {
+      "name": "预热期",
+      "start_ratio": 0.0,
+      "end_ratio": 0.1,
+      "focus": "互动",
+      "goal": "暖场并引导关注",
+      "preparation": [
+        "确认商品链接、价格和库存状态",
+        "准备主推 SKU 的卖点卡片"
+      ]
+    },
+    {
+      "name": "产品讲解期",
+      "start_ratio": 0.1,
+      "end_ratio": 0.5,
+      "focus": "讲解",
+      "goal": "讲清主推商品的核心卖点",
+      "preparation": [
+        "汇总高频问题用于集中答疑",
+        "准备成分、适用人群的核验资料"
+      ]
+    },
+    {
+      "name": "答疑期",
+      "start_ratio": 0.5,
+      "end_ratio": 0.7,
+      "focus": "答疑",
+      "goal": "集中回应高频问题和负面反馈",
+      "preparation": [
+        "确认当前活动价格与优惠券规则",
+        "准备促单话术和库存提示"
+      ]
+    },
+    {
+      "name": "促单期",
+      "start_ratio": 0.7,
+      "end_ratio": 0.9,
+      "focus": "转化",
+      "goal": "推动下单并处理最后疑虑",
+      "preparation": [
+        "准备收尾预告和下一场信息",
+        "核对未回答问题清单"
+      ]
+    },
+    {
+      "name": "收尾期",
+      "start_ratio": 0.9,
+      "end_ratio": 1.0,
+      "focus": "收尾",
+      "goal": "总结商品并做下场预告",
+      "preparation": [
+        "整理本场高频问题给下一场",
+        "回收并复盘本场互动数据"
+      ]
+    }
+  ],
+  "after_live_preparation": [
+    "整理本场高频问题并同步给下一场",
+    "复盘互动、点击和转化数据"
+  ],
+  "scoring": {
+    "base_weight": 0.6,
+    "signal_weight": 0.4,
+    "signal_scale": 0.6,
+    "topic_match_weight": 0.02,
+    "topic_match_cap": 0.08,
+    "negative_feedback": 0.08,
+    "purchase_intent": 0.05,
+    "repeated_question_weight": 0.08,
+    "repeated_question_cap": 0.2,
+    "spam_weight": 0.04,
+    "spam_cap": 0.08,
+    "super_chat": 0.05,
+    "gift": 0.01,
+    "event_cap": 0.1,
+    "cart_click_rise": 0.05,
+    "cart_click_drop": -0.04,
+    "low_conversion": 0.05,
+    "online_audience": 0.03,
+    "stage_focus_match": 0.1,
+    "stage_focus_mismatch": -0.04
+  },
+  "thresholds": {
+    "high_priority": 0.75,
+    "medium_priority": 0.6,
+    "repeated_alert": 2,
+    "spam_alert": 3,
+    "online_high": 1000,
+    "conversion_low": 3.0,
+    "cart_change_alert": 2.0,
+    "score_cap": 1.0
+  },
+  "conflicts": {
+    "answer_vs_promote": {
+      "enabled": true,
+      "promote_focus": "转化",
+      "answer_intents": ["答疑"],
+      "promote_intents": ["转化"],
+      "repeated_threshold": 2,
+      "negative_requires_answer": true,
+      "answer_interrupt_bonus": 0.15,
+      "promote_defer_penalty": -0.08
+    },
+    "compliance_override": {
+      "trigger_prefixes": ["需复核", "需人工复核"],
+      "priority": "低",
+      "score_cap": 0.1
+    }
+  }
+}

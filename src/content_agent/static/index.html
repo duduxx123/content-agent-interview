@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>ContentAgent 直播提词台</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23ff4d3d'/%3E%3Cpath d='M9 23V9h14v3H12v8h11v3z' fill='%230b1015'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/static/styles.css?v=8">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">CA</span>
+      <div class="brand-copy">
+        <strong>ContentAgent</strong>
+        <span>直播提词台</span>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <a class="topbar-link" href="/compliance">合规词库</a>
+      <span class="status" id="agent-status" data-state="idle">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span id="status-text">待命</span>
+      </span>
+      <span class="endpoint">POST /analyze</span>
+    </div>
+  </header>
+
+  <main class="console">
+    <aside class="input-rail" aria-label="场景输入">
+      <div class="rail-head">
+        <div>
+          <h1>直播控制台</h1>
+          <p>实时监听或回放预置场景</p>
+        </div>
+        <button type="button" class="text-btn" id="reset-btn">重置</button>
+      </div>
+
+      <div class="source-switch" role="group" aria-label="数据源">
+        <button type="button" id="mode-replay" aria-pressed="true">场景回放</button>
+        <button type="button" id="mode-live" aria-pressed="false">实时监听</button>
+      </div>
+      <p class="mode-note" id="mode-note"></p>
+
+      <section class="live-panel" id="live-panel" aria-label="实时监听" hidden>
+        <div class="live-state-row">
+          <span class="live-dot" id="live-dot" data-state="idle" aria-hidden="true"></span>
+          <div class="live-state-copy">
+            <strong id="live-state">未开始</strong>
+            <span id="live-detail">配置 .env 后开始监听 B 站直播间</span>
+          </div>
+        </div>
+
+        <label class="mini-field live-source-field">数据源
+          <select id="live-source">
+            <option value="bilibili">B 站直播间</option>
+            <option value="simulated">离线模拟源</option>
+          </select>
+        </label>
+
+        <label class="mini-field live-source-field">阶段控制
+          <select id="live-stage">
+            <option value="">按时间推进</option>
+          </select>
+        </label>
+        <p class="live-hint">手动选择阶段会覆盖时间推算；切换商品或阶段后，下一窗口生效，点“立即分析本窗口”可马上刷新。</p>
+
+        <label class="live-toggle">
+          <input id="live-auto" type="checkbox">
+          <span>自动刷新提词队列</span>
+        </label>
+        <p class="live-hint">默认关闭。勾选后每 10 秒自动刷新；关闭时只有点“立即分析本窗口”才更新。</p>
+
+        <div class="live-actions">
+          <button type="button" class="live-start" id="live-start">开始监听</button>
+          <button type="button" class="text-btn" id="live-stop" hidden>停止监听</button>
+        </div>
+
+        <div class="live-counters">
+          <span><b id="live-danmaku">0</b>弹幕</span>
+          <span><b id="live-gift">0</b>礼物件数</span>
+          <span><b id="live-super">0</b>醒目留言</span>
+          <span><b id="live-online">—</b>在线</span>
+        </div>
+
+        <div class="revenue-grid" aria-label="营收统计">
+          <div><span>礼物价值</span><b id="live-gift-value">¥0.00</b></div>
+          <div><span>醒目留言价值</span><b id="live-super-value">¥0.00</b></div>
+          <div><span>舰长</span><b id="live-guard-3">0 · ¥0.00</b></div>
+          <div><span>提督</span><b id="live-guard-2">0 · ¥0.00</b></div>
+          <div><span>总督</span><b id="live-guard-1">0 · ¥0.00</b></div>
+          <div><span>合计营收</span><b id="live-total-value">¥0.00</b></div>
+        </div>
+        <p class="live-hint">价值按 1000 金瓜子 = 1 元折算；银瓜子礼物计 0 元。舰长/提督/总督按等级单独统计。</p>
+
+        <div class="live-feed" id="live-feed" aria-live="polite">
+          <p class="feed-empty">等待直播事件</p>
+        </div>
+        <p class="live-hint" id="live-window-hint">自动刷新默认关闭；开始监听后点“立即分析本窗口”更新队列</p>
+      </section>
+
+      <div id="replay-fields">
+        <div class="preset-tabs" id="presets" role="group" aria-label="演示场景"></div>
+        <p class="preset-desc" id="preset-desc"></p>
+
+        <section class="field">
+          <div class="field-head">
+            <label for="elapsed">直播进度</label>
+            <output id="elapsed-label" for="elapsed">15:00 / 60:00</output>
+          </div>
+          <input id="elapsed" type="range" min="0" max="3600" step="30" value="900">
+          <div class="field-foot"><span>0:00</span><span id="planned-label">60:00</span></div>
+        </section>
+
+        <section class="field">
+          <div class="field-head">
+            <label for="directive">阶段指令</label>
+            <span class="hint">结构化输入</span>
+          </div>
+          <select id="directive">
+            <option value="none">不干预，按时间推进</option>
+            <option value="预热期">强制进入预热期</option>
+            <option value="产品讲解期">强制进入产品讲解期</option>
+            <option value="答疑期">强制进入答疑期</option>
+            <option value="促单期">强制进入促单期</option>
+            <option value="收尾期">强制进入收尾期</option>
+          </select>
+        </section>
+
+        <section class="field">
+          <div class="field-head">
+            <label for="comments">弹幕 / 醒目留言</label>
+            <span id="comment-count">0 条</span>
+          </div>
+          <textarea id="comments" rows="7" spellcheck="false" placeholder="每行一条弹幕"></textarea>
+        </section>
+
+        <section class="field compact-grid">
+          <label class="mini-field">醒目留言<input id="super-chat" type="number" min="0" step="1"></label>
+          <label class="mini-field">礼物<input id="gift" type="number" min="0" step="1"></label>
+        </section>
+      </div>
+
+      <details class="product">
+        <summary>
+          <span>当前商品</span>
+          <span class="product-summary" id="product-summary">未载入</span>
+        </summary>
+        <div class="product-body">
+          <label class="mini-field">商品目录
+            <select id="product-preset">
+              <option value="">当前场景商品</option>
+            </select>
+          </label>
+          <label class="mini-field">名称<input id="product-name" type="text"></label>
+          <div class="compact-grid">
+            <label class="mini-field">规格<input id="product-spec" type="text"></label>
+            <label class="mini-field">价格<input id="product-price" type="number" min="0" step="1"></label>
+          </div>
+          <label class="mini-field">成分（逗号分隔）<input id="product-ingredients" type="text"></label>
+          <label class="mini-field">特点（逗号分隔）<input id="product-benefits" type="text"></label>
+        </div>
+      </details>
+
+      <button type="button" class="run-btn" id="run-btn">
+        <span id="run-label">生成提词建议</span>
+        <kbd>Ctrl ↵</kbd>
+      </button>
+      <p class="rail-foot">实时模式只展示能从 B 站获取的在线人数；购物车点击、转化率没有公开数据源，不展示也不参与演示。</p>
+    </aside>
+
+    <section class="output" aria-live="polite">
+      <div class="error-banner" id="error-banner" role="alert" hidden></div>
+
+      <section class="stage-card" aria-label="直播阶段">
+        <div class="stage-top">
+          <div class="stage-identity">
+            <div class="stage-label">当前阶段 <span class="source-badge" id="stage-source">待分析</span></div>
+            <div class="stage-name" id="stage-name">待命</div>
+            <div class="stage-goal" id="stage-goal">载入场景后生成提词建议</div>
+          </div>
+          <div class="stage-clock">
+            <span class="clock-value" id="stage-remaining">--:--</span>
+            <span class="clock-label" id="stage-total">本阶段剩余</span>
+          </div>
+        </div>
+        <div class="timeline" id="timeline" aria-hidden="true"></div>
+        <p class="stage-note" id="stage-note" hidden></p>
+        <div class="stage-next">
+          <span class="next-label">下一阶段</span>
+          <strong id="next-stage">—</strong>
+          <ul class="prep-list" id="prep-list"></ul>
+        </div>
+      </section>
+
+      <section class="ai-summary" id="ai-summary" hidden>
+        <div class="section-head">
+          <h2>AI 决策摘要</h2>
+          <div class="section-meta">
+            <span class="ai-badge">AI 生成</span>
+          </div>
+        </div>
+        <p class="ai-summary-text" id="ai-summary-text"></p>
+      </section>
+
+      <section class="notes-block">
+        <div class="section-head">
+          <h2>调度说明</h2>
+          <div class="section-meta">
+            <span class="engine-badge">规则引擎</span>
+            <span id="notes-count">0 条</span>
+          </div>
+        </div>
+        <p class="notes-lede">解释本轮为什么这样排序：阶段冲突、同问/刷屏、合规降级和手动阶段指令。</p>
+        <div class="notes" id="notes"></div>
+      </section>
+
+      <section class="queue-block">
+        <div class="section-head">
+          <h2>提词队列</h2>
+          <div class="queue-tools">
+            <label class="queue-auto" id="queue-auto-wrap" hidden title="默认关闭；勾选后每 10 秒自动刷新">
+              <input id="queue-auto" type="checkbox">
+              <span>自动刷新</span>
+            </label>
+            <span id="queue-meta">等待分析</span>
+          </div>
+        </div>
+        <div class="queue" id="queue"></div>
+      </section>
+
+      <details class="summary-details" id="summary-details">
+        <summary>分析明细 <span id="summary-count">0 条</span></summary>
+        <ul id="summary-list"></ul>
+      </details>
+    </section>
+  </main>
+
+  <script src="/static/app.js?v=10"></script>
+</body>
+</html>

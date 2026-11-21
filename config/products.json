@@ -1,0 +1,194 @@
+{
+  "products": [
+    {
+      "sku_id": "12345",
+      "name": "控油修护精华液",
+      "specification": "30ml",
+      "price": 350,
+      "ingredients": ["水杨酸", "烟酰胺", "透明质酸"],
+      "benefits": ["控油", "修护", "保湿"],
+      "selling_points": [
+        {
+          "topic": "肤质",
+          "label": "控油特点",
+          "description": "控油",
+          "match_keywords": ["油皮", "出油", "控油", "油性肌肤"],
+          "evidence": "题目示例商品数据；正式使用前需核对商品标签或备案资料",
+          "verified": false
+        },
+        {
+          "topic": "功效",
+          "label": "修护与保湿特点",
+          "description": "修护、保湿",
+          "match_keywords": ["修护", "保湿", "干燥", "紧绷"],
+          "evidence": "题目示例商品数据；正式使用前需核对商品标签或备案资料",
+          "verified": false
+        },
+        {
+          "topic": "成分",
+          "label": "成分信息",
+          "description": "成分包括水杨酸、烟酰胺、透明质酸",
+          "match_keywords": ["成分", "水杨酸", "烟酰胺", "透明质酸"],
+          "evidence": "题目示例商品数据；正式使用前需核对商品标签或备案资料",
+          "verified": false
+        }
+      ],
+      "usage_instructions": [],
+      "applicable_audience": [],
+      "cautions": [],
+      "evidence_notes": ["此目录条目来自示例，不代表已核验的真实商品资料。"]
+    },
+    {
+      "sku_id": "20001",
+      "name": "氨基酸净澈洁面乳",
+      "specification": "120g",
+      "price": 89,
+      "ingredients": ["氨基酸表活", "甘油", "烟酰胺"],
+      "benefits": ["温和清洁", "保湿"],
+      "selling_points": [
+        {
+          "topic": "肤质",
+          "label": "清洁与肤感",
+          "description": "氨基酸表活清洁，甘油帮助保湿",
+          "match_keywords": ["敏感肌", "干皮", "洁面", "洗脸", "紧绷", "温和"],
+          "evidence": "演示商品资料；正式使用前需核对标签、备案和检测依据",
+          "verified": false
+        },
+        {
+          "topic": "成分",
+          "label": "成分信息",
+          "description": "成分包括氨基酸表活、甘油、烟酰胺",
+          "match_keywords": ["成分", "氨基酸", "甘油", "烟酰胺"],
+          "evidence": "演示商品资料；正式使用前需核对标签、备案和检测依据",
+          "verified": false
+        },
+        {
+          "topic": "用法",
+          "label": "使用方法",
+          "description": "取适量加水起泡后轻柔清洁，再以清水洗净",
+          "match_keywords": ["怎么用", "用法", "起泡", "洗脸"],
+          "evidence": "演示商品资料；正式使用前需核对标签、备案和检测依据",
+          "verified": false
+        }
+      ],
+      "usage_instructions": ["取适量于掌心，加水揉搓起泡后轻柔清洁面部，再用清水洗净。"],
+      "applicable_audience": ["有日常清洁需求的人群"],
+      "cautions": ["避开眼周；如出现不适请停止使用。"],
+      "evidence_notes": ["演示用商品资料；正式使用前需核对商品标签、备案信息和检测依据。"]
+    },
+    {
+      "sku_id": "20002",
+      "name": "保湿修护面霜",
+      "specification": "50g",
+      "price": 199,
+      "ingredients": ["神经酰胺", "角鲨烷", "透明质酸"],
+      "benefits": ["保湿", "修护"],
+      "selling_points": [
+        {
+          "topic": "肤质",
+          "label": "保湿与肤感",
+          "description": "神经酰胺、角鲨烷和透明质酸搭配，面向干燥紧绷肌肤的日常保湿",
+          "match_keywords": ["干皮", "干燥", "紧绷", "起皮", "面霜", "保湿"],
+          "evidence": "演示商品资料；正式使用前需核对标签、备案和检测依据",
+          "verified": false
+        },
+        {
+          "topic": "功效",
+          "label": "修护与保湿特点",
+          "description": "保湿、修护",
+          "match_keywords": ["修护", "保湿", "干燥"],
+          "evidence": "演示商品资料；正式使用前需核对标签、备案和检测依据",
+          "verified": false
+        },
+        {
+          "topic": "成分",
+          "label": "成分信息",
+          "description": "成分包括神经酰胺、角鲨烷、透明质酸",
+          "match_keywords": ["成分", "神经酰胺", "角鲨烷", "透明质酸"],
+          "evidence": "演示商品资料；正式使用前需核对标签、备案和检测依据",
+          "verified": false
+        }
+      ],
+      "usage_instructions": ["取适量均匀涂抹于面部，避开眼周。"],
+      "applicable_audience": ["有日常保湿需求的人群"],
+      "cautions": ["避开眼周；如出现不适请停止使用。"],
+      "evidence_notes": ["演示用商品资料；正式使用前需核对商品标签、备案信息和检测依据。"]
+    },
+    {
+      "sku_id": "20003",
+      "name": "清透防晒乳",
+      "specification": "50ml",
+      "price": 159,
+      "ingredients": ["二氧化钛", "氧化锌", "甘油"],
+      "benefits": ["防晒", "清爽"],
+      "selling_points": [
+        {
+          "topic": "用法",
+          "label": "使用与补涂",
+          "description": "出门前取足量涂抹，长时间户外活动时按商品说明补涂",
+          "match_keywords": ["怎么用", "用法", "补涂", "防晒", "户外"],
+          "evidence": "演示商品资料；正式使用前需核对标签、备案和检测依据",
+          "verified": false
+        },
+        {
+          "topic": "肤质",
+          "label": "肤感",
+          "description": "清爽型防晒乳，具体适用肤质以商品详情为准",
+          "match_keywords": ["油皮", "干皮", "敏感肌", "肤质", "清爽", "闷痘"],
+          "evidence": "演示商品资料；正式使用前需核对标签、备案和检测依据",
+          "verified": false
+        },
+        {
+          "topic": "成分",
+          "label": "成分信息",
+          "description": "成分包括二氧化钛、氧化锌、甘油",
+          "match_keywords": ["成分", "二氧化钛", "氧化锌"],
+          "evidence": "演示商品资料；正式使用前需核对标签、备案和检测依据",
+          "verified": false
+        }
+      ],
+      "usage_instructions": ["出门前取足量均匀涂抹于面部和暴露部位；长时间户外活动时按商品说明补涂。"],
+      "applicable_audience": ["有日常防晒需求的人群"],
+      "cautions": ["避开眼周；如出现不适请停止使用。"],
+      "evidence_notes": ["演示用商品资料；正式使用前需核对商品标签、备案信息和检测依据。"]
+    },
+    {
+      "sku_id": "20004",
+      "name": "舒缓保湿面膜",
+      "specification": "5片",
+      "price": 129,
+      "ingredients": ["积雪草", "泛醇", "透明质酸"],
+      "benefits": ["保湿", "舒缓"],
+      "selling_points": [
+        {
+          "topic": "肤质",
+          "label": "日常舒缓与保湿",
+          "description": "积雪草、泛醇和透明质酸搭配，面向干燥紧绷肌肤的日常保湿",
+          "match_keywords": ["干皮", "敏感肌", "泛红", "紧绷", "面膜", "舒缓"],
+          "evidence": "演示商品资料；正式使用前需核对标签、备案和检测依据",
+          "verified": false
+        },
+        {
+          "topic": "功效",
+          "label": "保湿特点",
+          "description": "保湿、舒缓",
+          "match_keywords": ["保湿", "舒缓", "干燥"],
+          "evidence": "演示商品资料；正式使用前需核对标签、备案和检测依据",
+          "verified": false
+        },
+        {
+          "topic": "成分",
+          "label": "成分信息",
+          "description": "成分包括积雪草、泛醇、透明质酸",
+          "match_keywords": ["成分", "积雪草", "泛醇", "透明质酸"],
+          "evidence": "演示商品资料；正式使用前需核对标签、备案和检测依据",
+          "verified": false
+        }
+      ],
+      "usage_instructions": ["洁面后取出面膜敷于面部，按商品说明停留后取下并轻拍吸收。"],
+      "applicable_audience": ["有日常保湿需求的人群"],
+      "cautions": ["避开眼周；如出现不适请停止使用。"],
+      "evidence_notes": ["演示用商品资料；正式使用前需核对商品标签、备案信息和检测依据。"]
+    }
+  ]
+}

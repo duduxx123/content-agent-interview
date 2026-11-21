@@ -1,0 +1,43 @@
+{
+  "live_state": {
+    "current_stage": "产品讲解期",
+    "elapsed_seconds": 2880,
+    "planned_seconds": 3600,
+    "current_sku": "精华液_sku_12345"
+  },
+  "recent_comments": [
+    "油皮能用吗？",
+    "油皮能用吗？",
+    "油皮能用吗？",
+    "价格太贵了",
+    "有没有小样？",
+    "什么时候发货？",
+    "主播能不能便宜点？",
+    "666",
+    "666",
+    "666",
+    "666",
+    "油皮",
+    "油皮",
+    "油皮",
+    "油皮"
+  ],
+  "event_counts": {
+    "danmaku": 15,
+    "super_chat": 2,
+    "gift": 5
+  },
+  "product": {
+    "sku_id": "12345",
+    "name": "控油修护精华液",
+    "specification": "30ml",
+    "price": 350,
+    "ingredients": ["水杨酸", "烟酰胺", "透明质酸"],
+    "benefits": ["控油", "修护", "保湿"]
+  },
+  "backend_metrics": {
+    "online_count": 1800,
+    "cart_click_rate_change": "上升8%",
+    "conversion_rate": "1.8%"
+  }
+}

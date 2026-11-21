@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>合规词库 · ContentAgent</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23ff4d3d'/%3E%3Cpath d='M9 23V9h14v3H12v8h11v3z' fill='%230b1015'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/static/styles.css?v=8">
+  <link rel="stylesheet" href="/static/compliance.css?v=3">
+</head>
+<body class="rules-body">
+  <header class="topbar">
+    <a class="brand brand-link" href="/">
+      <span class="brand-mark" aria-hidden="true">CA</span>
+      <div class="brand-copy">
+        <strong>ContentAgent</strong>
+        <span>合规词库</span>
+      </div>
+    </a>
+    <div class="topbar-right">
+      <a class="topbar-link" href="/">返回提词台</a>
+    </div>
+  </header>
+
+  <main class="rules-page">
+    <section class="rules-hero">
+      <div class="rules-hero-copy">
+        <p class="rules-kicker">直播话术预筛查</p>
+        <h1>合规词库</h1>
+        <p class="rules-lede">
+          按类别浏览需要复核的表达和替代方向。命中词库只表示需要人工复核，
+          不等同于法律结论；正式播报前仍要结合商品依据、适用规则和具体语境。
+        </p>
+      </div>
+      <div class="rules-stats" aria-label="词库统计">
+        <div><strong id="stat-terms">—</strong><span>词条</span></div>
+        <div><strong id="stat-groups">—</strong><span>类别</span></div>
+        <div><strong id="stat-high">—</strong><span>高风险</span></div>
+      </div>
+    </section>
+
+    <section class="rules-toolbar" aria-label="词库筛选">
+      <label class="rules-search">
+        <span>搜索</span>
+        <input id="rules-search" type="search" placeholder="搜索词条、类别或替代建议" autocomplete="off">
+      </label>
+      <div class="rules-filters" id="rules-filters" role="group" aria-label="风险等级筛选">
+        <button type="button" data-risk="" aria-pressed="true">全部</button>
+        <button type="button" data-risk="high_review" aria-pressed="false">高风险</button>
+        <button type="button" data-risk="review" aria-pressed="false">需核验</button>
+      </div>
+    </section>
+
+    <div class="rules-meta">
+      <p id="rules-count">正在载入…</p>
+      <p id="rules-notice"></p>
+    </div>
+
+    <div id="rules-groups" class="rules-groups"></div>
+    <p id="rules-empty" class="rules-empty" hidden>没有匹配的词条，换个关键词试试。</p>
+  </main>
+
+  <script src="/static/compliance.js?v=3"></script>
+</body>
+</html>
